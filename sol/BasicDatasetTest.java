@@ -68,7 +68,12 @@ public class BasicDatasetTest {
         shirleytemple.setAttributeValue("taste", "sour");
         shirleytemple.setAttributeValue("fruit", "orange");
         // Assert.assertEquals("false", this.testGenerator.getDecision(shirleytemple))
-
+        Row tequila = new Row("test row (tequila)");
+        shirleytemple.setAttributeValue("type", "shots");
+        shirleytemple.setAttributeValue("alcohol", "tequila");
+        shirleytemple.setAttributeValue("taste", "bitter");
+        shirleytemple.setAttributeValue("fruit", "lemon");
+        // Assert.assertEquals("true", this.testGenerator.getDecision(tequila))
 
     }
 }
