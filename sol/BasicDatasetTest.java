@@ -50,6 +50,13 @@ public class BasicDatasetTest {
         // TODO: make your own assertions based on the expected classifications
         // TODO: Uncomment this once you've implemented getDecision
        // Assert.assertEquals("true", this.testGenerator.getDecision(virginmargarita));
+        Row mojito = new Row("test row (mojito)");
+        mojito.setAttributeValue("type", "cocktail");
+        mojito.setAttributeValue("alcohol", "rum");
+        mojito.setAttributeValue("taste", "bitter");
+        mojito.setAttributeValue("fruit", "lemon");
+        // Assert.assertEquals("true", this.testGenerator.getDecision(mojito));
+
 
     }
 }
