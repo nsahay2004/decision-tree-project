@@ -1,0 +1,7 @@
+race, gender,age,wealth, profession,education,votedfor
+white,man,old,rich,businessman,Harvard,true
+white,woman,old,rich,politician,Yale,true
+white,man,young,rich, politician, Yale,true
+white,man,old,rich,businessman,Brown,true
+white,man,old,poor,teacher,Harvard,false
+black,woman,young,rich, politician,Harvard	,false

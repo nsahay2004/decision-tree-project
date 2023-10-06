@@ -1,0 +1,11 @@
+drink,type,alcohol,taste,fruit,willDrink
+virginmargarita, mocktail,none,sour,lemon,true
+shirleytemple, mocktail, none, sour, orange, false
+sangria, mocktail, none, bitter, pineapple, true
+oldfashioned, cocktail, whisky, bitter, orange, true
+negroni, cocktail, gin, sour,orange, false
+manhattan, cocktail, whisky, bitter,lemon true
+vesper, cocktail, gin, sour, lemon, true
+mojito, cocktail, rum, bitter, lemon, true
+
+
