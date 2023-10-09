@@ -1,7 +1,7 @@
-race, gender,age,wealth, profession,education,got-votes
-white,man,old,rich,businessman,Harvard,400-500
-white,woman,old,rich,politician,Yale,100-200
-white,man,young,rich, politician, Yale,200-300
-white,man,old,rich,businessman,Brown, 400-500
-white,man,old,poor,teacher,Harvard, 50-100
-black,woman,young,rich, politician,Harvard, 50-100
+candidate, race, gender,age,wealth, profession,education,got-votes
+candidate1, white,man,old,rich,businessman,Harvard,400-500
+candidate2, white,woman,old,rich,politician,Yale,100-200
+candidate3, white,man,young,rich, politician, Yale,400-500
+candidate4, white,man,old,rich,businessman,Yale, 400-500
+candidate5, white,man,old,poor,teacher,Harvard, 50-100
+candidate6, black,woman,young,rich, politician,Harvard, 50-100
