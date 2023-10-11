@@ -1,5 +1,6 @@
 package sol;
 
+import java.util.Random;
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import src.Row;
  * A class representing a training dataset for the decision tree
  */
 // TODO: Uncomment this once you've implemented the methods in the IDataset interface!
-public class Dataset /* implements IDataset */ {
+public class Dataset  implements IDataset {
     private List<String> attributeList;
     private List<Row> dataObjects;
     private AttributeSelection attributeSelection;
@@ -31,6 +32,22 @@ public class Dataset /* implements IDataset */ {
         this.attributeSelection = attributeSelection;
     }
 
+    public List<String> getAttributeList(){
+        return this.attributeList;
+    }
+
+    public List<Row> getDataObjects(){
+        return this.dataObjects;
+    }
+
+    public AttributeSelection getSelectionType(){
+        return this.attributeSelection;
+    }
+
+    public int size(){
+        return this.attributeList.size();
+    }
+
     //    TODO: Uncomment this once you've completed the constructor!
     public String getAttributeToSplitOn() {
         switch (this.attributeSelection) {
@@ -42,7 +59,12 @@ public class Dataset /* implements IDataset */ {
             }
             case RANDOM -> {
                 // TODO: Implement random attribute selection!
-                return this.attributeList.stream().sorted().toList().get((int) (Math.random() * (this.attributeList.size())));
+                Random random = new Random();
+                int upperBound = this.attributeList.size();
+                int randomNum = random.nextInt(upperBound);
+
+
+                return this.attributeList.stream().sorted().toList().get(randomNum);
 
             }
         }

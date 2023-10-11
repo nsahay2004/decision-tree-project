@@ -5,8 +5,16 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import static org.junit.Assert.assertFalse;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
+import src.AttributeSelection;
+import src.DecisionTreeCSVParser;
+import src.Row;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class containing the tests for methods in the TreeGenerator and Dataset classes
@@ -42,5 +50,15 @@ public class DecisionTreeTest {
     @Test
     public void testAssertFalse() {
         assertFalse(false);
+    }
+
+    @Test
+    public void testDataset(){
+        String fruitstrainingPath = "data/fruits-and-vegetables.csv";
+        List<Row> dataObjects = DecisionTreeCSVParser.parse(fruitstrainingPath);
+        List<String> fruitsAttributeList = new ArrayList<>(dataObjects.get(0).getAttributes());
+        Dataset fruits = new Dataset(fruitsAttributeList, dataObjects, AttributeSelection.ASCENDING_ALPHABETICAL);
+        Assert.assertEquals(8, fruits.size());
+;
     }
 }
