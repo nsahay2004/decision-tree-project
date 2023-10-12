@@ -1,13 +1,13 @@
 package sol;
 
+import java.util.*;
 import java.util.Random;
-import java.util.List;
-import java.util.Random;
-import java.util.ArrayList;
+
 
 import src.AttributeSelection;
 import src.IDataset;
 import src.Row;
+
 
 /**
  * A class representing a training dataset for the decision tree
@@ -27,24 +27,25 @@ public class Dataset  implements IDataset {
      */
     public Dataset(List<String> attributeList, List<Row> dataObjects, AttributeSelection attributeSelection) {
         // TODO: implement the constructor! (Hint: take a look at `getAttributeToSplitOn`)
-        this.attributeList = new ArrayList<String>();
-        this.dataObjects = dataObjects;
+        this.attributeList = new ArrayList<String>(attributeList);
+        this.dataObjects = new ArrayList<Row>(dataObjects);
         this.attributeSelection = attributeSelection;
     }
 
-    public List<String> getAttributeList(){
+    public List<String> getAttributeList() {
         return this.attributeList;
     }
 
-    public List<Row> getDataObjects(){
+    public List<Row> getDataObjects() {
         return this.dataObjects;
     }
 
-    public AttributeSelection getSelectionType(){
+    public AttributeSelection getSelectionType() {
         return this.attributeSelection;
     }
 
-    public int size(){
+
+    public int size() {
         return this.attributeList.size();
     }
 
@@ -71,4 +72,61 @@ public class Dataset  implements IDataset {
         throw new RuntimeException("Non-Exhaustive Switch Case");
     }
 
-}
+
+    public List<String> distinctHelper(String attributeName) {
+        List<String> distinctValues = new ArrayList<>();
+        for (Row r : this.dataObjects) {
+            String value = r.getAttributeValue(attributeName);
+            if (!distinctValues.contains(value)) {
+                distinctValues.add(value);
+            }
+
+        }
+        return distinctValues;
+    }
+
+    List<String> originalList = new ArrayList<String>(this.attributeList.size());
+    public Dataset partitionHelper(String selectedAttribute, String targetedValue) {
+
+        List<Row> datasetRows = new ArrayList<Row>();
+        for (int i = 0; i < this.dataObjects.size(); i++) {
+            if (this.dataObjects.get(i).getAttributeValue(selectedAttribute).equals(targetedValue)) {
+                datasetRows.add(this.dataObjects.get(i));
+            }
+        }
+        Dataset datasetFiltered = new Dataset(this.attributeList, datasetRows, this.attributeSelection);
+        return datasetFiltered;
+    }
+
+    public List<Dataset> partition(String splitAttribute) {
+        //String splitAttribute = this.getAttributeToSplitOn();
+        //this.attributeList.remove(splitAttribute);
+        List<String> distinctValues = this.distinctHelper(splitAttribute);
+        List<Dataset>  partitionedDatasets = new ArrayList<>();
+            for (String v: distinctValues) {
+                Dataset m = partitionHelper(splitAttribute,v);
+                partitionedDatasets.add(m);
+            }
+                return partitionedDatasets;
+            }
+
+    public int lengthRows(){
+        return this.dataObjects.size();
+    }
+
+    public String getDefault(String targetAttribute){
+       List<Dataset> splitTargetList = this.partition(targetAttribute);
+       List<Integer> rowLengthList = new ArrayList<>();
+
+       for (Dataset l: splitTargetList){
+           rowLengthList.add(l.lengthRows());
+       }
+       int max = rowLengthList.stream().max();
+       int index = rowLengthList.indexOf(max);
+       return splitTargetList.get(index).dataObjects.get(0).getAttributeValue(targetAttribute);
+
+
+    }
+
+
+    }

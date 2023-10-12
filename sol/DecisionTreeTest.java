@@ -53,12 +53,21 @@ public class DecisionTreeTest {
     }
 
     @Test
-    public void testDataset(){
+    public void testDatasetsize(){
         String fruitstrainingPath = "data/fruits-and-vegetables.csv";
         List<Row> dataObjects = DecisionTreeCSVParser.parse(fruitstrainingPath);
         List<String> fruitsAttributeList = new ArrayList<>(dataObjects.get(0).getAttributes());
         Dataset fruits = new Dataset(fruitsAttributeList, dataObjects, AttributeSelection.ASCENDING_ALPHABETICAL);
-        Assert.assertEquals(8, fruits.size());
+        Assert.assertEquals(4, fruits.size());
 ;
     }
+    @Test
+    public void testDatasetgetAttributetoSplitOn(){
+        String fruitstrainingPath = "data/fruits-and-vegetables.csv";
+        List<Row> dataObjects = DecisionTreeCSVParser.parse(fruitstrainingPath);
+        List<String> fruitsAttributeList = new ArrayList<>(dataObjects.get(0).getAttributes());
+        Dataset fruits = new Dataset(fruitsAttributeList, dataObjects, AttributeSelection.ASCENDING_ALPHABETICAL);
+        Assert.assertEquals("calories",fruits.getAttributeToSplitOn());
+    }
+
 }
