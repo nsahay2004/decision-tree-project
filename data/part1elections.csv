@@ -1,3 +1,4 @@
+candidate,race,gender,age,wealth,profession,education,got-votes
 candidate1, white,man,old,rich,businessman,Harvard,400-500
 candidate2, white,woman,old,rich,politician,Yale,100-200
 candidate3, white,man,young,rich, politician, Yale,400-500

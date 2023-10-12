@@ -41,6 +41,7 @@ public class TreeGenerator  implements ITreeGenerator<Dataset>  {
 
     }
 
+    @Override
     public void generateTree(Dataset trainingData, String targetAttribute){
         List<String> copyAttributeList = new ArrayList<>();
         Dataset copytrainingData = new Dataset(copyAttributeList,trainingData.getDataObjects(),trainingData.getSelectionType());
@@ -51,6 +52,11 @@ public class TreeGenerator  implements ITreeGenerator<Dataset>  {
             copyAttributeList.add(l);
         }
         this.root = treeHelper(copytrainingData,targetAttribute);
+    }
+
+    @Override
+    public String getDecision(Row forDatum){
+        return null;
     }
 
     }

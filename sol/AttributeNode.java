@@ -33,10 +33,10 @@ public class AttributeNode  implements ITreeNode {
                     return o.getChild().getDecision(forDatum);
                 }
             }
-        } else {
-            return this.defaultValue;
         }
-    }
+            return this.defaultValue;
+
+
 
 
     }
