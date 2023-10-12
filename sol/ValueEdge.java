@@ -11,4 +11,16 @@ public class ValueEdge {
     private String valuename;
     private ITreeNode child;
 
+    public ValueEdge(String valuename, ITreeNode child){
+        this.valuename = valuename;
+        this.child = child;
+    }
+
+    public String getValuename() {
+        return this.valuename;
+    }
+
+    public ITreeNode getChild(){
+        return this.child;
+    }
 }

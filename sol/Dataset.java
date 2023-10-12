@@ -85,7 +85,6 @@ public class Dataset  implements IDataset {
         return distinctValues;
     }
 
-    List<String> originalList = new ArrayList<String>(this.attributeList.size());
     public Dataset partitionHelper(String selectedAttribute, String targetedValue) {
 
         List<Row> datasetRows = new ArrayList<Row>();
@@ -98,9 +97,18 @@ public class Dataset  implements IDataset {
         return datasetFiltered;
     }
 
+
+    public List<String> copyList(List<String> attribute){
+        List<String> copyAttributeList  = new ArrayList<String>();
+        for(String a: attribute){
+            copyAttributeList.add(a);
+        }
+        return copyAttributeList;
+    }
+
     public List<Dataset> partition(String splitAttribute) {
-        //String splitAttribute = this.getAttributeToSplitOn();
-        //this.attributeList.remove(splitAttribute);
+        List<String> copyList = this.copyList(this.attributeList);
+        copyList.remove(splitAttribute);
         List<String> distinctValues = this.distinctHelper(splitAttribute);
         List<Dataset>  partitionedDatasets = new ArrayList<>();
             for (String v: distinctValues) {
@@ -114,16 +122,24 @@ public class Dataset  implements IDataset {
         return this.dataObjects.size();
     }
 
+    public int getMaxRows(List<Dataset> parts) {
+        int max = -1;
+        int index = 0;
+
+        for (int i = 0; i < parts.size(); i++){
+            if (parts.get(i).dataObjects.size() >= max){
+                max = parts.get(i).dataObjects.size();
+                index = i;
+
+
+            }
+        }
+        return index;
+    }
+
     public String getDefault(String targetAttribute){
        List<Dataset> splitTargetList = this.partition(targetAttribute);
-       List<Integer> rowLengthList = new ArrayList<>();
-
-       for (Dataset l: splitTargetList){
-           rowLengthList.add(l.lengthRows());
-       }
-       int max = rowLengthList.stream().max();
-       int index = rowLengthList.indexOf(max);
-       return splitTargetList.get(index).dataObjects.get(0).getAttributeValue(targetAttribute);
+       return splitTargetList.get(getMaxRows(splitTargetList)).dataObjects.get(0).getAttributeValue(targetAttribute);
 
 
     }
