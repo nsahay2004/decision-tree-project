@@ -18,7 +18,13 @@ public class DecisionLeaf  implements ITreeNode {
         this.outcome = outcome;
     }
 
+    @Override
     public String getDecision(Row forDatum){
         return this.outcome;
     }
+
+//    @Override
+//    public String getName(){
+//        return this.outcome;
+//    }
 }

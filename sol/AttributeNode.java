@@ -25,6 +25,7 @@ public class AttributeNode  implements ITreeNode {
         this.outgoingEdges = outgoingEdges;
     }
 
+    @Override
     public String getDecision(Row forDatum) {
         String targetValue = forDatum.getAttributeValue(this.name);
             for (ValueEdge o : this.outgoingEdges) {
@@ -39,6 +40,11 @@ public class AttributeNode  implements ITreeNode {
 
 
     }
+
+//    @Override
+//    public String getName(){
+//        return this.name;
+//    }
 
 
     // TODO: implement the ITreeNode interface

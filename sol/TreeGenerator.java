@@ -58,4 +58,8 @@ public class TreeGenerator  implements ITreeGenerator<Dataset>  {
         return this.root.getDecision(forDatum);
     }
 
+    public ITreeNode getRoot(){
+        return this.root;
+    }
+
     }

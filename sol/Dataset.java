@@ -45,8 +45,9 @@ public class Dataset  implements IDataset {
     }
 
 
+    @Override
     public int size() {
-        return this.attributeList.size();
+        return this.dataObjects.size();
     }
 
     //    TODO: Uncomment this once you've completed the constructor!
@@ -88,7 +89,7 @@ public class Dataset  implements IDataset {
     public Dataset partitionHelper(String selectedAttribute, String targetedValue) {
 
         List<Row> datasetRows = new ArrayList<Row>();
-        for (int i = 0; i < this.dataObjects.size(); i++) {
+        for (int i = 0; i < this.size(); i++) {
             if (this.dataObjects.get(i).getAttributeValue(selectedAttribute).equals(targetedValue)) {
                 datasetRows.add(this.dataObjects.get(i));
             }
@@ -118,17 +119,15 @@ public class Dataset  implements IDataset {
         return partitionedDatasets;
     }
 
-    public int lengthRows() {
-        return this.dataObjects.size();
-    }
+
 
     public int getMaxRows(List<Dataset> parts) {
         int max = -1;
         int index = 0;
 
         for (int i = 0; i < parts.size(); i++) {
-            if (parts.get(i).dataObjects.size() >= max) {
-                max = parts.get(i).dataObjects.size();
+            if (parts.get(i).size() >= max) {
+                max = parts.get(i).size();
                 index = i;
 
 
@@ -162,6 +161,8 @@ public class Dataset  implements IDataset {
         }
 
     }
+
+
 }
 
 
