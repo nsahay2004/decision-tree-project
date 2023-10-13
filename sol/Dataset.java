@@ -93,32 +93,32 @@ public class Dataset  implements IDataset {
                 datasetRows.add(this.dataObjects.get(i));
             }
         }
-        Dataset datasetFiltered = new Dataset(this.attributeList, datasetRows, this.attributeSelection);
+        List<String> copyList = this.copyList(this.attributeList);
+        copyList.remove(selectedAttribute);
+        Dataset datasetFiltered = new Dataset(copyList, datasetRows, this.attributeSelection);
         return datasetFiltered;
     }
 
 
-    public List<String> copyList(List<String> attribute){
-        List<String> copyAttributeList  = new ArrayList<String>();
-        for(String a: attribute){
+    public List<String> copyList(List<String> attribute) {
+        List<String> copyAttributeList = new ArrayList<String>();
+        for (String a : attribute) {
             copyAttributeList.add(a);
         }
         return copyAttributeList;
     }
 
     public List<Dataset> partition(String splitAttribute) {
-        List<String> copyList = this.copyList(this.attributeList);
-        copyList.remove(splitAttribute);
         List<String> distinctValues = this.distinctHelper(splitAttribute);
-        List<Dataset>  partitionedDatasets = new ArrayList<>();
-            for (String v: distinctValues) {
-                Dataset m = partitionHelper(splitAttribute,v);
-                partitionedDatasets.add(m);
-            }
-                return partitionedDatasets;
-            }
+        List<Dataset> partitionedDatasets = new ArrayList<>();
+        for (String v : distinctValues) {
+            Dataset m = partitionHelper(splitAttribute, v);
+            partitionedDatasets.add(m);
+        }
+        return partitionedDatasets;
+    }
 
-    public int lengthRows(){
+    public int lengthRows() {
         return this.dataObjects.size();
     }
 
@@ -126,8 +126,8 @@ public class Dataset  implements IDataset {
         int max = -1;
         int index = 0;
 
-        for (int i = 0; i < parts.size(); i++){
-            if (parts.get(i).dataObjects.size() >= max){
+        for (int i = 0; i < parts.size(); i++) {
+            if (parts.get(i).dataObjects.size() >= max) {
                 max = parts.get(i).dataObjects.size();
                 index = i;
 
@@ -137,12 +137,35 @@ public class Dataset  implements IDataset {
         return index;
     }
 
-    public String getDefault(String targetAttribute){
-       List<Dataset> splitTargetList = this.partition(targetAttribute);
-       return splitTargetList.get(getMaxRows(splitTargetList)).dataObjects.get(0).getAttributeValue(targetAttribute);
+    public String getDefault(String targetAttribute) {
+        List<Dataset> splitTargetList = this.partition(targetAttribute);
+        return splitTargetList.get(getMaxRows(splitTargetList)).dataObjects.get(0).getAttributeValue(targetAttribute);
 
 
     }
 
+    public boolean isSameValue(String attribute) {
+        String sameAttributeValue = this.dataObjects.get(0).getAttributeValue(attribute);
+        String answer = "true";
+        for (Row r : this.dataObjects) {
+            if (!r.getAttributeValue(attribute) .equals(sameAttributeValue)) {
+                ;
+                answer = "false";
+            }
+        }
+        if (answer.equals("true")) {
+            return true;
+        }
+
+        else{
+            return false;
+        }
 
     }
+}
+
+
+
+
+
+

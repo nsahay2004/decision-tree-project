@@ -76,19 +76,8 @@ public class DecisionTreeTest {
         List<Row> dataObjects = DecisionTreeCSVParser.parse(electionsTrainingPath);
         List<String> electionsAttributeList = new ArrayList<>(dataObjects.get(0).getAttributes());
         Dataset elect = new Dataset(electionsAttributeList,dataObjects,AttributeSelection.ASCENDING_ALPHABETICAL);
-        String blackElectionsTrainingPath = "data/part2elections.csv";
-        List<Row> dataObjects1 = DecisionTreeCSVParser.parse(blackElectionsTrainingPath);
-        System.out.println(dataObjects1.size());
-        List<String> blackElectionsAttributeList = new ArrayList<>(dataObjects1.get(0).getAttributes());
-        Dataset blackElections = new Dataset(blackElectionsAttributeList,dataObjects1,AttributeSelection.ASCENDING_ALPHABETICAL);
-        String whiteElectionsTrainingPath = "data/part1elections.csv";
-        List<Row> dataObjects2 = DecisionTreeCSVParser.parse(whiteElectionsTrainingPath);
-        List<String> whiteElectionsAttributeList = new ArrayList<>(dataObjects1.get(0).getAttributes());
-        Dataset whiteElections = new Dataset(whiteElectionsAttributeList,dataObjects2,AttributeSelection.ASCENDING_ALPHABETICAL);
-        List<Dataset> compareList = new ArrayList<Dataset>();
-        compareList.add(blackElections);
-        compareList.add(whiteElections);
-        Assert.assertEquals(compareList.size(),elect.partition("race").size());
+        Assert.assertEquals(2,elect.partition("race").size());
+        Assert.assertTrue(elect.partition("race").get(0).isSameValue("race"));
 
 
 

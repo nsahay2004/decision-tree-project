@@ -23,7 +23,7 @@ public class TreeGenerator  implements ITreeGenerator<Dataset>  {
 
 
     public ITreeNode treeHelper(Dataset trainingData,String targetAttribute){
-        if (trainingData.getAttributeList().equals(Collections.emptyList())) {
+        if (trainingData.getAttributeList().equals(Collections.emptyList()) || trainingData.isSameValue(targetAttribute)) {
             return new DecisionLeaf(trainingData.getDataObjects().get(0).getAttributeValue(targetAttribute));
         }
         else {
@@ -44,19 +44,18 @@ public class TreeGenerator  implements ITreeGenerator<Dataset>  {
     @Override
     public void generateTree(Dataset trainingData, String targetAttribute){
         List<String> copyAttributeList = new ArrayList<>();
-        Dataset copytrainingData = new Dataset(copyAttributeList,trainingData.getDataObjects(),trainingData.getSelectionType());
+        Dataset copyTrainingData = new Dataset(copyAttributeList,trainingData.getDataObjects(),trainingData.getSelectionType());
         List<String> withoutTargetAttribute = trainingData.getAttributeList();
-        int index = withoutTargetAttribute.indexOf(targetAttribute);
-        withoutTargetAttribute.remove(index);
+        withoutTargetAttribute.remove(targetAttribute);
         for (String l: withoutTargetAttribute){
             copyAttributeList.add(l);
         }
-        this.root = treeHelper(copytrainingData,targetAttribute);
+        this.root = treeHelper(copyTrainingData,targetAttribute);
     }
 
     @Override
     public String getDecision(Row forDatum){
-        return null;
+        return this.root.getDecision(forDatum);
     }
 
     }

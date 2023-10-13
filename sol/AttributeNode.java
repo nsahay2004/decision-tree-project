@@ -27,13 +27,12 @@ public class AttributeNode  implements ITreeNode {
 
     public String getDecision(Row forDatum) {
         String targetValue = forDatum.getAttributeValue(this.name);
-        if (this.outgoingEdges.contains(targetValue)) {
             for (ValueEdge o : this.outgoingEdges) {
-                if (o.getValuename() == targetValue) {
+                if (o.getValuename().equals(targetValue)){
                     return o.getChild().getDecision(forDatum);
                 }
             }
-        }
+
             return this.defaultValue;
 
 
