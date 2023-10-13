@@ -63,8 +63,8 @@ public class Row {
             this.attributeAccesses.add(attributeName);
             return this.attributeValues.get(attributeName);
         } else {
-            throw new RuntimeException("Attribute '" + attributeName
-                    + "' did not exist in datum with name: " + this.displayName);
+            throw new IllegalArgumentException("Attribute '" + attributeName
+                    + "' does not exist in datum with name: " + this.displayName);
         }
     }
 

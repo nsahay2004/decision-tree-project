@@ -60,14 +60,10 @@ public class Dataset  implements IDataset {
                 return this.attributeList.stream().sorted().toList().get(this.attributeList.size() - 1);
             }
             case RANDOM -> {
-                // TODO: Implement random attribute selection!
                 Random random = new Random();
                 int upperBound = this.attributeList.size();
                 int randomNum = random.nextInt(upperBound);
-
-
-                return this.attributeList.stream().sorted().toList().get(randomNum);
-
+                return this.attributeList.get(randomNum); // Get the attribute at the random index
             }
         }
         throw new RuntimeException("Non-Exhaustive Switch Case");

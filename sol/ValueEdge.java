@@ -8,16 +8,16 @@ import src.ITreeNode;
 public class ValueEdge {
     // TODO: add more fields if needed
 
-    private String valuename;
+    private String valueName;
     private ITreeNode child;
 
-    public ValueEdge(String valuename, ITreeNode child){
-        this.valuename = valuename;
+    public ValueEdge(String valueName, ITreeNode child){
+        this.valueName = valueName;
         this.child = child;
     }
 
-    public String getValuename() {
-        return this.valuename;
+    public String getvalueName() {
+        return this.valueName;
     }
 
     public ITreeNode getChild(){
