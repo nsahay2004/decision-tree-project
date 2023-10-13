@@ -14,5 +14,5 @@ public interface ITreeNode {
      */
     public String getDecision(Row forDatum);
 
-//    public String getName();
+
 }

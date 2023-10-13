@@ -11,20 +11,30 @@ public class DecisionLeaf  implements ITreeNode {
     // TODO: add fields as needed
 
     // TODO: Implement the ITreeNode interface
+    /**
+     * outcome field of the leaf
+     */
 
     private String outcome;
+
+    /**
+     * constructor of decision leaf
+     * @param outcome - outcome of the lefa
+     */
 
     public DecisionLeaf(String outcome){
         this.outcome = outcome;
     }
 
+    /**
+     *
+     * @param forDatum the datum to lookup a decision for
+     * @return - decision as string
+     */
     @Override
     public String getDecision(Row forDatum){
         return this.outcome;
     }
 
-//    @Override
-//    public String getName(){
-//        return this.outcome;
-//    }
+
 }
